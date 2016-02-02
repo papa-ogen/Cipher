@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Craven Cipher</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+<div data-role="page" data-theme="a">
+  <div data-role="header" data-theme="b">
+    <h1>Encipher/Decipher</h1>    
+  </div> 
+  <div data-role="content">	
+	<div class="ui-grid-a ui-responsive">
+		<div data-role="header" class="ui-bar-b ui-bar" role="banner">
+				<label for="cipherHelper-global-input" title="Encipher/Decipher your text">Input Text</label>
+				<textarea id="cipherHelper-global-input" placeholder="Write the text you wish to decipher or encipher here."></textarea>
+		</div>
+	</div>
+	
+	<div class="ui-grid-b ui-responsive">
+		<div class="ui-block-a js-rot-13">	  
+			<div class="ui-grid-a ui-bar">
+				<label for="dOutput823" title="Encoded/Decoded text">Rot-13 Cipher</label>
+				<Textarea id="dOutput823" class="rot-13-output"></textarea>				
+			</div>
+		</div>
+		<div class="ui-block-b js-atbash">
+			<div class="ui-grid-a ui-bar">
+				<label for="ddOutput287564" title="Encoded/Decoded text">Atbash Cipher</label>
+				<Textarea id="ddOutput287564" class="atbash-output" ></textarea>	
+			</div>
+		</div>
+		<div class="ui-block-c js-letter-number">
+			<div class="ui-grid-a ui-bar">
+				<label for="ddOutput2122" title="Encoded/Decoded text">Letter Cipher</label>
+				<Textarea id="ddOutput2122" class="letter-number-output" ></textarea>	
+			</div>
+		</div>		
+		<div class="ui-block-a js-baconian">
+			<div class="ui-grid-a ui-bar">	
+				<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">			
+					<legend><label for="ddOutput123" title="Encoded/Decoded text">Baconian Cipher</label></legend>
+					<label for="dTypeDecipher13" title="Decipher coded text, example: Hold OFf uNtIl you hEar frOm mE agAin. wE May cOMpROmIse.">Decipher</label>
+					<input type="radio" name="baconianType" value="decipher" id="dTypeDecipher13" checked="checked" class="baconian-radio" />		
+					<label for="dTypeEncode123" title="Encode plain text to Baconian, example: my code here">Encode</label>
+					<input type="radio" name="baconianType" value="encode" id="dTypeEncode123" class="baconian-radio" />
+					<label for="dTypeDecode54654" title="Decode Baconian to plain text, example: baaab baaba baaaa abaaa abaab aabaa abbaa abbab babaa">Decode</label>
+					<input type="radio" name="baconianType" value="decode" id="dTypeDecode54654" class="baconian-radio" />	
+				</fieldset>			
+				<Textarea id="ddOutput123" class="baconian-output"></textarea>			
+			</div>
+		</div>
+		<div class="ui-block-b js-binary">
+			<div class="ui-grid-a ui-bar">
+				<label for="ddOutput21qw22" title="Encoded/Decoded text">Binary Code (ASCII)</label>
+				<Textarea id="ddOutput21qw22" class="binary-output"></textarea>	
+			</div>		
+		</div>		
+	</div>
+  </div>
+	<div data-role="footer" role="contentinfo" class="cipher-footer">
+		<p><a href="http://craven-studio.com" target="_blank">Craven Studio</a> - 2015</p>
+	</div>
+</div>
+        <script src="dist/js/cipher.min.js"></script>
+    </body>
+</html>
+
