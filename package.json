@@ -14,7 +14,7 @@
     "run-sequence": "^2.1.0"
   },
   "description": "Encipher, decipher common algorithms",
-  "main": "Gruntfile.js",
+  "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -31,6 +31,8 @@
   "homepage": "https://github.com/papa-ogen/Cipher#readme",
   "dependencies": {
     "babel-core": "^6.25.0",
-    "gulp": "^3.9.1"
+    "bulma": "^0.5.1",
+    "gulp": "^3.9.1",
+    "jquery": "^3.2.1"
   }
 }
