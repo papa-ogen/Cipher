@@ -2,8 +2,10 @@
   "name": "cipher",
   "version": "0.1.0",
   "devDependencies": {
+    "babel-preset-env": "^1.6.0",
     "browser-sync": "^2.18.13",
     "del": "^3.0.0",
+    "gulp-babel": "^7.0.0",
     "gulp-cache": "^0.4.6",
     "gulp-imagemin": "^3.3.0",
     "gulp-sass": "^3.1.0",
@@ -28,6 +30,7 @@
   },
   "homepage": "https://github.com/papa-ogen/Cipher#readme",
   "dependencies": {
+    "babel-core": "^6.25.0",
     "gulp": "^3.9.1"
   }
 }

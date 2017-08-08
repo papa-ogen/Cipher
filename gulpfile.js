@@ -6,8 +6,10 @@ var uglify = require('gulp-uglify');
 var gulpIf = require('gulp-if');
 var cssnano = require('gulp-cssnano');
 var runSequence = require('run-sequence');
+var del = require('del');
 var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
+const babel = require('gulp-babel');
 
 gulp.task('sass', function () {
   return gulp.src('app/scss/**/*.scss')
@@ -18,8 +20,17 @@ gulp.task('sass', function () {
     }))
 })
 
-gulp.task('watch', ['browserSync', 'sass'], function () {
+gulp.task('babel', () =>
+    gulp.src('app/es6/**/*.js')
+        .pipe(babel({
+            presets: ['env']
+        }))
+        .pipe(gulp.dest('app/js'))
+);
+
+gulp.task('watch', ['browserSync', 'sass', 'babel'], function () {
   gulp.watch('app/scss/**/*.scss', ['sass']);
+  gulp.watch('app/es6/**/*.js', ['babel']);
   gulp.watch('app/*.html', browserSync.reload);
   gulp.watch('app/js/**/*.js', browserSync.reload);
 })
@@ -59,13 +70,13 @@ gulp.task('clean:dist', function () {
 
 gulp.task('build', function (callback) {
   runSequence('clean:dist', 
-    ['sass', 'useref', 'images', 'fonts'],
+    ['sass', 'babel', 'useref', 'images', 'fonts'],
     callback
   )
 })
 
 gulp.task('default', function (callback) {
-  runSequence(['sass','browserSync', 'watch'],
+  runSequence(['sass', 'babel', 'browserSync', 'watch'],
     callback
   )
 })
