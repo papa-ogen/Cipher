@@ -6,6 +6,8 @@ var uglify = require('gulp-uglify');
 var gulpIf = require('gulp-if');
 var cssnano = require('gulp-cssnano');
 var runSequence = require('run-sequence');
+var imagemin = require('gulp-imagemin');
+var cache = require('gulp-cache');
 
 gulp.task('sass', function () {
   return gulp.src('app/scss/**/*.scss')
@@ -38,17 +40,25 @@ gulp.task('useref', function () {
     .pipe(gulp.dest('dist'))
 })
 
-gulp.task('fonts', function() {
+gulp.task('fonts', function () {
   return gulp.src('app/fonts/**/*')
-  .pipe(gulp.dest('dist/fonts'))
+    .pipe(gulp.dest('dist/fonts'))
 })
 
-gulp.task('clean:dist', function() {
+gulp.task('images', function () {
+  return gulp.src('app/images/**/*.+(png|jpg|jpeg|gif|svg)')
+    .pipe(cache(imagemin({
+      interlaced: true
+    })))
+    .pipe(gulp.dest('dist/images'))
+})
+
+gulp.task('clean:dist', function () {
   return del.sync('dist');
 })
 
 gulp.task('build', function (callback) {
-  runSequence('clean:dist', 
+  runSequence('clean:dist',
     ['sass', 'useref', 'images', 'fonts'],
     callback
   )
