@@ -12,7 +12,7 @@ var cache = require('gulp-cache');
 const babel = require('gulp-babel');
 
 gulp.task('sass', function () {
-  return gulp.src('app/scss/**/*.scss')
+  return gulp.src('app/scss/styles.scss')
     .pipe(sass())
     .pipe(gulp.dest('app/css'))
     .pipe(browserSync.reload({
