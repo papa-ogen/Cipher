@@ -11,7 +11,7 @@
 
 var cipherHelper = {
 	GLOBAL_INPUT: document.getElementById("cipherHelper-global-input"),
-	alphabet: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
+	alphabet: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "Å", "Ä", "Ö"],
 	alphabetLength: function alphabetLength() {
 		return this.alphabet.length;
 	},

@@ -53,10 +53,10 @@
   }
 
   // Init
-  const atbashList = document.querySelectorAll('.js-atbash');
+  const list = document.querySelectorAll('.js-atbash');
   
-  for (let atbash of atbashList) {
-    new Atbash(atbash);
+  for (let item of list) {
+    new Atbash(item);
   }
 
 })(cipherHelper); // eslint-disable-line no-undef

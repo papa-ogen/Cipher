@@ -1,90 +1,80 @@
 /**
  * @letterNumber.js 
- * One of the first ciphers that kids learn is this "letter number" cipher. You replace letters with a number: A=1, B=2, C=3, etc.
+ * One of the first ciphers that kids learn is this 'letter number' cipher. You replace letters with a number: A=1, B=2, C=3, etc.
  * 
  * You can use the constant GLOBAL_INPUT from cipherHelper if you want one input for several ciphers for example
  */
-(function ($, cipherHelper) {
-  "use strict";
 
-  var c = cipherHelper;
-  var ALPHABET = c.alphabet;
-  var GLOBAL_INPUT = $(c.GLOBAL_INPUT);
+(function (cipherHelper) {
+  'use strict';
 
-  var LetterNumber = function (obj) {
-    // If Constructor is called without "new" for instance from a call(), re-cell the constructor with this as obj argument.
-    if (!(this instanceof LetterNumber)) {
-      return new LetterNumber(this);
+  class LetterNumber {
+    constructor(wrapper) {
+      this.c = cipherHelper;
+      this.ALPHABET = this.c.alphabet;
+      this.GLOBAL_INPUT = this.c.GLOBAL_INPUT;
+      this.inputEl = this.GLOBAL_INPUT || wrapper.querySelector('.letter-number-input');
+      this.outputEl = wrapper.querySelector('.letter-number-output');
+
+      if (this.inputEl.value.length > 0) {
+        this.update();
+      }
+
+      this.inputEl.addEventListener('input', e => this.update(e));
     }
-    // Set the instance to make the instance available in all methods and events.
-    var letterNumber = $.extend(this, {
-      obj: $(obj),
-      InputEl: $(".letter-number-input", obj), // mandatory
-      OutputEl: $(".letter-number-output", obj) // mandatory
-    });
-    return this.init(obj);
-  };
 
-  LetterNumber.prototype = {
-    deCipher: function (input) {
-      var output = "";
-      input = input.replace(/,\s*$/, "");
-      input = input.split(",");
+    decipher(input) {
+      let output = '';
+      input = input.replace(/,\s*$/, '');
+      input = input.split(',');
 
-      for (var i = 0; i < input.length; i++) {
-        var index = ALPHABET[input[i] - 1];
+      for (let i = 0; i < input.length; i++) {
+        let index = this.ALPHABET[input[i] - 1];
         // If input is not a character
-        if (input[i].match(/[^a-zA-Z]/) && typeof index != "undefined") {
+        if (input[i].match(/[^a-zA-Z]/) && typeof index != 'undefined') {
           output += index;
         }
       }
 
       return output;
-    },
-    enCipher: function (input) {
-      var output = "";
+    }
+
+    encipher(input) {
+      let output = '';
 
       input = input.toUpperCase();
 
-      for (var i = 0; i < input.length; i++) {
-        var index = ALPHABET.indexOf(input[i]);
+      for (let i = 0; i < input.length; i++) {
+        let index = this.ALPHABET.indexOf(input[i]);
         if (index !== -1) {
           output += index + 1;
         }
       }
 
       return output;
-    },
-    updatePanels: function () {
-      var input = $.trim(this.InputEl.val());
-      var output = "";
+    }
+
+    update() {
+      let input = this.inputEl.value.trim();
+      let output = '';
 
       if (input.length > 0) {
-        if (input.indexOf(",") !== -1 || c.isNumeric(input)) {
-          output = $.trim(this.deCipher(input));
+        if (input.indexOf(',') !== -1 || this.c.isNumeric(input)) {
+          output = this.decipher(input).trim();
         } else {
-          output = $.trim(this.enCipher(input));
+          output = this.encipher(input).trim();
         }
 
-        this.OutputEl.val(output);
+        this.outputEl.value = output;
       }
-    },
-    init: function () {
-      var _this = this;
-
-      this.InputEl = GLOBAL_INPUT.length > 0 ? GLOBAL_INPUT : this.InputEl;
-
-      if (this.InputEl.val().length > 0) {
-        this.updatePanels();
-      }
-
-      this.InputEl.bind('input propertychange', function () {
-        _this.updatePanels();
-      });
     }
-  };
+  }
 
-  $('.js-letter-number').each(LetterNumber);
+  // Init
+  const list = document.querySelectorAll('.js-letter-number');
 
-  return LetterNumber;
-})(jQuery, cipherHelper);
+  for (let item of list) {
+    new LetterNumber(item);
+  }
+
+})(cipherHelper); // eslint-disable-line no-undef

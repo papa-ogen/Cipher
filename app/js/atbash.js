@@ -73,17 +73,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   // Init
 
 
-  var atbashList = document.querySelectorAll('.js-atbash');
+  var list = document.querySelectorAll('.js-atbash');
 
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
   var _iteratorError = undefined;
 
   try {
-    for (var _iterator = atbashList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var atbash = _step.value;
+    for (var _iterator = list[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var item = _step.value;
 
-      new Atbash(atbash);
+      new Atbash(item);
     }
   } catch (err) {
     _didIteratorError = true;
