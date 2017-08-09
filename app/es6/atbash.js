@@ -40,6 +40,7 @@
           output += input[i];
         }
       }
+
       return output.trim();
     }
 
@@ -51,9 +52,11 @@
     }
   }
 
+  // Init
   const atbashList = document.querySelectorAll('.js-atbash');
   
   for (let atbash of atbashList) {
     new Atbash(atbash);
   }
+
 })(cipherHelper); // eslint-disable-line no-undef

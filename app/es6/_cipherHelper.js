@@ -7,7 +7,6 @@
  * You can use the constant GLOBAL_INPUT from cipherHelper if you want one input for several ciphers for example
  */
 
-
 const cipherHelper = {
 	GLOBAL_INPUT : document.getElementById("cipherHelper-global-input"),
 	alphabet : ["A","B","C","D","E","F","G","H","I","J","K","L","M","N",

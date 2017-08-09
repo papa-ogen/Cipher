@@ -54,6 +54,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             output += input[i];
           }
         }
+
         return output.trim();
       }
     }, {
@@ -68,6 +69,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     return Atbash;
   }();
+
+  // Init
+
 
   var atbashList = document.querySelectorAll('.js-atbash');
 
