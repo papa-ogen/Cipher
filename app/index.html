@@ -94,16 +94,31 @@
             </div>
           </div>
           <div class="tab-content" data-for="baconian">
-
-            Baconian
-
+            <div class="field js-baconian">
+              <label class="label">Baconian</label>
+              <div class="control">
+                <label class="radio" title="Decipher coded text, example: Hold OFf uNtIl you hEar frOm mE agAin. wE May cOMpROmIse.">
+                  <input type="radio" name="baconianType" value="decipher" class="baconian-radio">
+                  Decipher
+                </label>
+                <label class="radio" title="Encode plain text to Baconian, example: my code here">
+                  <input type="radio" name="baconianType" value="encode" class="baconian-radio">
+                  Encode
+                </label>
+                <label class="radio" title="Decode Baconian to plain text, example: baaab baaba baaaa abaaa abaab aabaa abbaa abbab babaa">
+                  <input type="radio" name="baconianType" value="decode" class="baconian-radio">
+                  Decode
+                </label>
+              </div>
+              <div class="control">
+                <textarea class="textarea baconian-output" rows="2" placeholder=""></textarea>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
   </section>
-
-
 
   <!--build:js js/main.min.js -->
   <script src="js/vendor/jquery-3.2.1.js"></script>
@@ -113,6 +128,7 @@
   <script src="js/atbash.js"></script>
   <script src="js/letterNumber.js"></script>
   <script src="js/binary.js"></script>
+  <script src="js/baconian.js"></script>
   <script src="js/main.js"></script>
   <!-- endbuild -->
 </body>
