@@ -43,6 +43,14 @@ gulp.task('browserSync', function () {
   })
 })
 
+gulp.task('browserSync:build', function () {
+  browserSync.init({
+    server: {
+      baseDir: 'dist'
+    },
+  })
+})
+
 gulp.task('useref', function () {
   return gulp.src('app/*.html')
     .pipe(useref())
@@ -70,7 +78,7 @@ gulp.task('clean:dist', function () {
 
 gulp.task('build', function (callback) {
   runSequence('clean:dist', 
-    ['sass', 'babel', 'useref', 'images', 'fonts'],
+    ['sass', 'babel', 'useref', 'images', 'fonts', 'browserSync:build'],
     callback
   )
 })
