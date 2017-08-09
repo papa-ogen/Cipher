@@ -3,16 +3,120 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Cipher</title>
+  <title>Encipher/Decipher</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.min.css">
 
   <link rel="stylesheet" href="css/styles.min.css">
 
 </head>
 
 <body>
-  <h1>Cipher</h1>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">
+        Encipher/Decipher
+      </h1>
+      <p class="subtitle">
+        Your encoder in cyberspace
+      </p>
+    </div>
+
+    <hr>
+
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <div class="field">
+          <label class="label" for="cipherHelper-global-input">Input Text</label>
+          <div class="control">
+            <textarea id="cipherHelper-global-input" class="textarea is-primary" placeholder="Write the text you wish to decipher or encipher here."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="container tab-list-wrapper">
+      <div class="columns">
+        <div class="column">
+          <ul class="tab-list">
+            <li class="tab tab-active" data-tab="rot13"><a href="#/">Rot-13</a></li>
+            <li class="tab" data-tab="atbash"><a href="#/">Atbash</a></li>
+            <li class="tab" data-tab="letter"><a href="#/">Letter</a></li>
+            <li class="tab" data-tab="binary"><a href="#/">Binary Code (ASCII)</a></li>
+            <li class="tab" data-tab="baconian"><a href="#/">Baconian Cipher</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column">
+          <!-- Rot13 -->
+          <div class="tab-content tab-content-active" data-for="rot13">
+            <div class="field js-rot-13">
+              <label class="label">Rot-13</label>
+              <div class="control">
+                <textarea class="textarea rot-13-output" rows="2" placeholder=""></textarea>
+              </div>
+            </div>
+          </div>
+          <!-- //Rot13 -->
+
+          <!-- Atbash -->
+          <div class="tab-content" data-for="atbash">
+            <div class="field js-atbash">
+              <label class="label">Atbash</label>
+              <div class="control">
+                <textarea class="textarea atbash-output" rows="2" placeholder=""></textarea>
+              </div>
+            </div>
+          </div>
+          <!-- //Atbash -->
+
+          <div class="tab-content" data-for="letter">
+            <div class="field js-letter-number">
+              <label class="label">Letter</label>
+              <div class="control">
+                <textarea class="textarea letter-number-output" rows="2" placeholder=""></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="tab-content" data-for="binary">
+            <div class="field js-binary">
+              <label class="label">Binary</label>
+              <div class="control">
+                <textarea class="textarea binary-output" rows="2" placeholder=""></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="tab-content" data-for="baconian">
+            <div class="field js-baconian">
+              <label class="label">Baconian</label>
+              <div class="control">
+                <label class="radio" title="Decipher coded text, example: Hold OFf uNtIl you hEar frOm mE agAin. wE May cOMpROmIse.">
+                  <input type="radio" name="baconianType" value="decipher" class="baconian-radio">
+                  Decipher
+                </label>
+                <label class="radio" title="Encode plain text to Baconian, example: my code here">
+                  <input type="radio" name="baconianType" value="encode" class="baconian-radio">
+                  Encode
+                </label>
+                <label class="radio" title="Decode Baconian to plain text, example: baaab baaba baaaa abaaa abaab aabaa abbaa abbab babaa">
+                  <input type="radio" name="baconianType" value="decode" class="baconian-radio">
+                  Decode
+                </label>
+              </div>
+              <div class="control">
+                <textarea class="textarea baconian-output" rows="2" placeholder=""></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
 
   <script src="js/main.min.js"></script>
 </body>
