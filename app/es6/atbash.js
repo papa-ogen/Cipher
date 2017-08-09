@@ -4,69 +4,56 @@
  * 
  * You can use the constant GLOBAL_INPUT from cipherHelper if you want one input for several ciphers for example
  */
-(function ($, cipherHelper) {
-  "use strict";
 
-  var c = cipherHelper;
-  var ALPHABET = c.alphabet;
-  var ALPHALENGTH = c.alphabetLength();
-  var GLOBAL_INPUT = $(c.GLOBAL_INPUT);
+(function (cipherHelper) {
+  'use strict';
 
-  var Atbash = function (obj) {
-    // If Constructor is called without "new" for instance from a call(), re-cell the constructor with this as obj argument.
-    if (!(this instanceof Atbash)) {
-      return new Atbash(this);
+  class Atbash {
+    constructor(wrapper) {
+      this.c = cipherHelper;
+      this.ALPHABET = this.c.alphabet;
+      this.ALPHALENGTH = this.ALPHABET.length;
+      this.GLOBAL_INPUT = this.c.GLOBAL_INPUT;
+      this.inputEl = this.GLOBAL_INPUT || wrapper.querySelector('.atbash-input');
+      this.outputEl = wrapper.querySelector('.atbash-output');
+
+      if (this.inputEl.value.length > 0) {
+        this.update();
+      }
+
+      this.inputEl.addEventListener('input', e => this.update(e));
     }
-    // Set the instance to make the instance available in all methods and events.
-    var atbash = $.extend(this, {
-      obj: $(obj),
-      InputEl: $(".atbash-input", obj), // mandatory
-      OutputEl: $(".atbash-output", obj) // mandatory
-    });
-    return this.init(obj);
-  };
 
-  Atbash.prototype = {
-    deCipher: function (input) {
-      var output = "";
+    decipher(input) {
+      let output = '';
 
       input = input.toUpperCase();
 
-      for (var i = 0; i < input.length; i++) {
-        var index = ALPHABET.indexOf(input[i]);
+      for (let i = 0; i < input.length; i++) {
+        let index = this.ALPHABET.indexOf(input[i]);
 
         if (index !== -1) {
-          var tmp = (index - ALPHALENGTH) + 1;
+          let tmp = (index - this.ALPHALENGTH) + 1;
           tmp = (tmp - tmp) + -tmp;
-          output += ALPHABET[tmp];
+          output += this.ALPHABET[tmp];
         } else {
           output += input[i];
         }
       }
-      return output;
-    },
-    updatePanels: function () {
-      var input = $.trim(this.InputEl.val());
-      var output = $.trim(this.deCipher(input));
-
-      this.OutputEl.val(output);
-    },
-    init: function () {
-      var _this = this;
-
-      this.InputEl = GLOBAL_INPUT.length > 0 ? GLOBAL_INPUT : this.InputEl;
-
-      if (this.InputEl.val().length > 0) {
-        this.updatePanels();
-      }
-
-      this.InputEl.bind('input propertychange', function () {
-        _this.updatePanels();
-      });
+      return output.trim();
     }
-  };
-  
-  $('.js-atbash').each(Atbash);
 
-  return Atbash;
-})(jQuery, cipherHelper);
+    update() {
+      let input = this.inputEl.value.trim();
+      let output = this.decipher(input);
+
+      this.outputEl.value = output;
+    }
+  }
+
+  const atbashList = document.querySelectorAll('.js-atbash');
+  
+  for (let atbash of atbashList) {
+    new Atbash(atbash);
+  }
+})(cipherHelper); // eslint-disable-line no-undef

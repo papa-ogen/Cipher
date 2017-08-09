@@ -1,4 +1,8 @@
-"use strict";
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
  * @atbash.js 
@@ -6,69 +10,89 @@
  * 
  * You can use the constant GLOBAL_INPUT from cipherHelper if you want one input for several ciphers for example
  */
-(function ($, cipherHelper) {
-  "use strict";
 
-  var c = cipherHelper;
-  var ALPHABET = c.alphabet;
-  var ALPHALENGTH = c.alphabetLength();
-  var GLOBAL_INPUT = $(c.GLOBAL_INPUT);
+(function (cipherHelper) {
+  'use strict';
 
-  var Atbash = function Atbash(obj) {
-    // If Constructor is called without "new" for instance from a call(), re-cell the constructor with this as obj argument.
-    if (!(this instanceof Atbash)) {
-      return new Atbash(this);
-    }
-    // Set the instance to make the instance available in all methods and events.
-    var atbash = $.extend(this, {
-      obj: $(obj),
-      InputEl: $(".atbash-input", obj), // mandatory
-      OutputEl: $(".atbash-output", obj) // mandatory
-    });
-    return this.init(obj);
-  };
-
-  Atbash.prototype = {
-    deCipher: function deCipher(input) {
-      var output = "";
-
-      input = input.toUpperCase();
-
-      for (var i = 0; i < input.length; i++) {
-        var index = ALPHABET.indexOf(input[i]);
-
-        if (index !== -1) {
-          var tmp = index - ALPHALENGTH + 1;
-          tmp = tmp - tmp + -tmp;
-          output += ALPHABET[tmp];
-        } else {
-          output += input[i];
-        }
-      }
-      return output;
-    },
-    updatePanels: function updatePanels() {
-      var input = $.trim(this.InputEl.val());
-      var output = $.trim(this.deCipher(input));
-
-      this.OutputEl.val(output);
-    },
-    init: function init() {
+  var Atbash = function () {
+    function Atbash(wrapper) {
       var _this = this;
 
-      this.InputEl = GLOBAL_INPUT.length > 0 ? GLOBAL_INPUT : this.InputEl;
+      _classCallCheck(this, Atbash);
 
-      if (this.InputEl.val().length > 0) {
-        this.updatePanels();
+      this.c = cipherHelper;
+      this.ALPHABET = this.c.alphabet;
+      this.ALPHALENGTH = this.ALPHABET.length;
+      this.GLOBAL_INPUT = this.c.GLOBAL_INPUT;
+      this.inputEl = this.GLOBAL_INPUT || wrapper.querySelector('.atbash-input');
+      this.outputEl = wrapper.querySelector('.atbash-output');
+
+      if (this.inputEl.value.length > 0) {
+        this.update();
       }
 
-      this.InputEl.bind('input propertychange', function () {
-        _this.updatePanels();
+      this.inputEl.addEventListener('input', function (e) {
+        return _this.update(e);
       });
     }
-  };
 
-  $('.js-atbash').each(Atbash);
+    _createClass(Atbash, [{
+      key: 'decipher',
+      value: function decipher(input) {
+        var output = '';
 
-  return Atbash;
-})(jQuery, cipherHelper);
+        input = input.toUpperCase();
+
+        for (var i = 0; i < input.length; i++) {
+          var index = this.ALPHABET.indexOf(input[i]);
+
+          if (index !== -1) {
+            var tmp = index - this.ALPHALENGTH + 1;
+            tmp = tmp - tmp + -tmp;
+            output += this.ALPHABET[tmp];
+          } else {
+            output += input[i];
+          }
+        }
+        return output.trim();
+      }
+    }, {
+      key: 'update',
+      value: function update() {
+        var input = this.inputEl.value.trim();
+        var output = this.decipher(input);
+
+        this.outputEl.value = output;
+      }
+    }]);
+
+    return Atbash;
+  }();
+
+  var atbashList = document.querySelectorAll('.js-atbash');
+
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = atbashList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var atbash = _step.value;
+
+      new Atbash(atbash);
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+})(cipherHelper); // eslint-disable-line no-undef
