@@ -71,9 +71,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'update',
       value: function update() {
-        var reg = /^\d+$/;
+        var isNumber = /^\d+$/;
         var input = this.inputEl.value.trim();
-        var output = reg.test(input) ? this.decipherNumber(input) : this.decipher(input);
+        var output = isNumber.test(input) ? this.decipherNumber(input) : this.decipher(input);
 
         this.outputEl.value = output.join('');
       }

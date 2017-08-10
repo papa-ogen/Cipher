@@ -50,9 +50,9 @@
     }
 
     update() {
-      const reg = /^\d+$/;
+      const isNumber = /^\d+$/;
       const input = this.inputEl.value.trim();
-      const output = reg.test(input) ? this.decipherNumber(input) : this.decipher(input);
+      const output = isNumber.test(input) ? this.decipherNumber(input) : this.decipher(input);
       
       this.outputEl.value = output.join('');
     }
