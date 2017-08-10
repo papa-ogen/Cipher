@@ -27,17 +27,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.ALPHABET = this.c.alphabet;
       this.ALPHALENGTH = this.ALPHABET.length;
       this.GLOBAL_INPUT = this.c.GLOBAL_INPUT;
-      this.DEFAULT_CIPHER = 13;
-      this.DEFAULT_NRCIPHER = 5;
-      this.inputEl = this.GLOBAL_INPUT || wrapper.querySelector('.rot-13-input');
-      this.outputEl = wrapper.querySelector('.rot-13-output');
+      this.CIPHER = 10;
+      this.NRCIPHER = 5;
+      this.inputElement = this.GLOBAL_INPUT || wrapper.querySelector('.rot-13-input');
+      this.outputElement = wrapper.querySelector('.rot-13-output');
+      this.rangeSlider = wrapper.querySelector('.rot-13-range');
+      this.cipherValueElement = wrapper.querySelector('.rot-13-cipher-value');
+      this.rangeSlider.value = this.CIPHER;
+      this.cipherValueElement.innerHTML = this.CIPHER;
 
-      if (this.inputEl.value.length > 0) {
+      if (this.inputElement.value.length > 0) {
         this.update();
       }
 
-      this.inputEl.addEventListener('input', function (e) {
-        return _this.update(e);
+      this.inputElement.addEventListener('keyup', function () {
+        return _this.update();
+      });
+      this.rangeSlider.addEventListener('change', function (e) {
+        _this.CIPHER = e.target.value;
+        _this.cipherValueElement.innerHTML = e.target.value;
+        _this.update();
       });
     }
 
@@ -53,7 +62,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         return input.split('').map(function (letter) {
           var letterIndex = _this2.getLetterIndex(letter);
-          var cipher = _this2.DEFAULT_CIPHER;
+          var cipher = _this2.CIPHER;
           var alength = _this2.ALPHALENGTH;
 
           return letterIndex + cipher >= alength ? _this2.ALPHABET[letterIndex + cipher - alength] : _this2.ALPHABET[letterIndex + cipher];
@@ -62,7 +71,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'decipherNumber',
       value: function decipherNumber(input) {
-        var cipher = this.DEFAULT_NRCIPHER;
+        var cipher = this.NRCIPHER;
 
         return input.split('').map(function (number) {
           return number + cipher;
@@ -72,10 +81,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'update',
       value: function update() {
         var isNumber = /^\d+$/;
-        var input = this.inputEl.value.trim();
+        var input = this.inputElement.value.trim();
         var output = isNumber.test(input) ? this.decipherNumber(input) : this.decipher(input);
 
-        this.outputEl.value = output.join('');
+        this.outputElement.value = output.join('');
       }
     }]);
 

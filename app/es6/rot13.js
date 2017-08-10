@@ -17,16 +17,25 @@
       this.ALPHABET = this.c.alphabet;
       this.ALPHALENGTH = this.ALPHABET.length;
       this.GLOBAL_INPUT = this.c.GLOBAL_INPUT;
-      this.DEFAULT_CIPHER = 13;
-      this.DEFAULT_NRCIPHER = 5;
-      this.inputEl = this.GLOBAL_INPUT || wrapper.querySelector('.rot-13-input');
-      this.outputEl = wrapper.querySelector('.rot-13-output');
+      this.CIPHER = 10;
+      this.NRCIPHER = 5;
+      this.inputElement = this.GLOBAL_INPUT || wrapper.querySelector('.rot-13-input');
+      this.outputElement = wrapper.querySelector('.rot-13-output');
+      this.rangeSlider = wrapper.querySelector('.rot-13-range');
+      this.cipherValueElement = wrapper.querySelector('.rot-13-cipher-value');
+      this.rangeSlider.value = this.CIPHER;
+      this.cipherValueElement.innerHTML = this.CIPHER;
 
-      if (this.inputEl.value.length > 0) {
+      if (this.inputElement.value.length > 0) {
         this.update();
       }
 
-      this.inputEl.addEventListener('input', e => this.update(e));
+      this.inputElement.addEventListener('keyup', () => this.update());
+      this.rangeSlider.addEventListener('change', e => {
+        this.CIPHER = e.target.value;
+        this.cipherValueElement.innerHTML = e.target.value;
+        this.update();
+      });
     }
 
     getLetterIndex(letter) {
@@ -36,7 +45,7 @@
     decipher(input) {
       return input.split('').map((letter) => {
         const letterIndex = this.getLetterIndex(letter);
-        const cipher = this.DEFAULT_CIPHER;
+        const cipher = this.CIPHER;
         const alength = this.ALPHALENGTH;
 
         return letterIndex + cipher >= alength ? this.ALPHABET[(letterIndex + cipher - alength)] : this.ALPHABET[letterIndex + cipher];
@@ -44,17 +53,17 @@
     }
 
     decipherNumber(input) {
-      const cipher = this.DEFAULT_NRCIPHER;
+      const cipher = this.NRCIPHER;
 
-      return input.split('').map((number) => { return number + cipher; });
+      return input.split('').map((number) => number + cipher);
     }
 
     update() {
       const isNumber = /^\d+$/;
-      const input = this.inputEl.value.trim();
+      const input = this.inputElement.value.trim();
       const output = isNumber.test(input) ? this.decipherNumber(input) : this.decipher(input);
-      
-      this.outputEl.value = output.join('');
+
+      this.outputElement.value = output.join('');
     }
   }
 
