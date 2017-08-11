@@ -13,6 +13,7 @@ var del = require('del');
 var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 const babel = require('gulp-babel');
+const file = require('gulp-file');
 
 gulp.task('sass', function () {
   return gulp.src('app/scss/styles.scss')
@@ -75,13 +76,20 @@ gulp.task('images', function () {
     .pipe(gulp.dest('dist/images'));
 });
 
+gulp.task('CNAME', function() {
+  var str = 'cipher.craven-studio.com';
+ 
+  return file('CNAME', str, { src: true })
+    .pipe(gulp.dest('dist'));
+});
+
 gulp.task('clean:dist', function () {
   return del.sync('dist');
 });
 
 gulp.task('build', function (callback) {
   runSequence('clean:dist', 
-    ['sass', 'babel', 'useref', 'images', 'fonts', 'browserSync:build'],
+    ['sass', 'babel', 'useref', 'images', 'fonts', 'CNAME', 'browserSync:build'],
     callback
   );
 });

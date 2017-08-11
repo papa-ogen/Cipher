@@ -56,8 +56,9 @@
           <!-- Rot13 -->
           <div class="tab-content tab-content-active" data-for="rot13">
             <div class="field js-rot-13">
-              <label class="label">Rot-13</label>
+              <label class="label">Rot-<span class="rot-13-cipher-value">13</span></label>
               <div class="control">
+                <input type="range" min="1" max="13" step="1" class="rot-13-range">
                 <textarea class="textarea rot-13-output" rows="2" placeholder=""></textarea>
               </div>
             </div>
