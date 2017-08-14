@@ -52,7 +52,7 @@ $black: #000;
 
 .tab-list-wrapper {
   & .tab-content {
-    transition: opacity 800ms ease-out;
+    transition: opacity 0.1s ease-out;
     opacity: 0; 
     height: 0;
     overflow: hidden;

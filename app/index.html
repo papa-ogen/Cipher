@@ -44,8 +44,8 @@
       <div class="columns">
         <div class="column">
           <ul class="tab-list">
-            <li class="tab tab-active" data-tab="rot13"><a href="#/">Rot-13</a></li>
-            <li class="tab" data-tab="atbash"><a href="#/">Atbash</a></li>
+            <li class="tab "><a href="#/">Rot-13</a></li>
+            <li class="tab tab-active" data-tab="atbash"><a href="#/">Atbash</a></li>
             <li class="tab" data-tab="letter"><a href="#/">Letter</a></li>
             <li class="tab" data-tab="binary"><a href="#/">Binary Code (ASCII)</a></li>
             <li class="tab" data-tab="baconian"><a href="#/">Baconian Cipher</a></li>
@@ -56,7 +56,7 @@
       <div class="columns">
         <div class="column">
           <!-- Rot13 -->
-          <div class="tab-content tab-content-active" data-for="rot13">
+          <div class="tab-content " data-for="rot13">
             <div class="field js-rot-13">
               <label class="label">Rot-<span class="rot-13-cipher-value">13</span></label>
               <div class="control">
@@ -68,9 +68,10 @@
           <!-- //Rot13 -->
 
           <!-- Atbash -->
-          <div class="tab-content" data-for="atbash">
+          <div class="tab-content tab-content-active" data-for="atbash">
             <div class="field js-atbash">
               <label class="label">Atbash</label>
+              <p class="help">First letter becomes the last letter, last becomes first</p>
               <div class="control">
                 <textarea class="textarea atbash-output" rows="2" placeholder=""></textarea>
               </div>

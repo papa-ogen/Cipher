@@ -14,47 +14,34 @@
       this.ALPHABET = this.c.alphabet;
       this.ALPHALENGTH = this.ALPHABET.length;
       this.GLOBAL_INPUT = this.c.GLOBAL_INPUT;
-      this.inputEl = this.GLOBAL_INPUT || wrapper.querySelector('.atbash-input');
-      this.outputEl = wrapper.querySelector('.atbash-output');
+      this.inputElement = this.GLOBAL_INPUT || wrapper.querySelector('.atbash-input');
+      this.outputElement = wrapper.querySelector('.atbash-output');
 
-      if (this.inputEl.value.length > 0) {
-        this.update();
-      }
+      this.inputElement.value.length > 0 && this.update();
 
-      this.inputEl.addEventListener('input', e => this.update(e));
+      this.inputElement.addEventListener('input', () => this.update());
     }
 
-    decipher(input) {
-      let output = '';
+    encode(input) {
+      const inputToArray = input.toUpperCase().split('');
 
-      input = input.toUpperCase();
-
-      for (let i = 0; i < input.length; i++) {
-        let index = this.ALPHABET.indexOf(input[i]);
-
-        if (index !== -1) {
-          let tmp = (index - this.ALPHALENGTH) + 1;
-          tmp = (tmp - tmp) + -tmp;
-          output += this.ALPHABET[tmp];
-        } else {
-          output += input[i];
-        }
-      }
-
-      return output.trim();
+      return inputToArray.map(letter => {
+        const index = this.ALPHABET.indexOf(letter);
+        return index === -1 ? letter : this.ALPHABET[(this.ALPHALENGTH - 1) - index];
+      }).join('');
     }
 
     update() {
-      let input = this.inputEl.value.trim();
-      let output = this.decipher(input);
+      let input = this.inputElement.value.trim();
+      let output = this.encode(input);
 
-      this.outputEl.value = output;
+      this.outputElement.value = output;
     }
   }
 
   // Init
   const list = document.querySelectorAll('.js-atbash');
-  
+
   for (let item of list) {
     new Atbash(item);
   }

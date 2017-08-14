@@ -24,46 +24,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.ALPHABET = this.c.alphabet;
       this.ALPHALENGTH = this.ALPHABET.length;
       this.GLOBAL_INPUT = this.c.GLOBAL_INPUT;
-      this.inputEl = this.GLOBAL_INPUT || wrapper.querySelector('.atbash-input');
-      this.outputEl = wrapper.querySelector('.atbash-output');
+      this.inputElement = this.GLOBAL_INPUT || wrapper.querySelector('.atbash-input');
+      this.outputElement = wrapper.querySelector('.atbash-output');
 
-      if (this.inputEl.value.length > 0) {
-        this.update();
-      }
+      this.inputElement.value.length > 0 && this.update();
 
-      this.inputEl.addEventListener('input', function (e) {
-        return _this.update(e);
+      this.inputElement.addEventListener('input', function () {
+        return _this.update();
       });
     }
 
     _createClass(Atbash, [{
-      key: 'decipher',
-      value: function decipher(input) {
-        var output = '';
+      key: 'encode',
+      value: function encode(input) {
+        var _this2 = this;
 
-        input = input.toUpperCase();
+        var inputToArray = input.toUpperCase().split('');
 
-        for (var i = 0; i < input.length; i++) {
-          var index = this.ALPHABET.indexOf(input[i]);
-
-          if (index !== -1) {
-            var tmp = index - this.ALPHALENGTH + 1;
-            tmp = tmp - tmp + -tmp;
-            output += this.ALPHABET[tmp];
-          } else {
-            output += input[i];
-          }
-        }
-
-        return output.trim();
+        return inputToArray.map(function (letter) {
+          var index = _this2.ALPHABET.indexOf(letter);
+          return index === -1 ? letter : _this2.ALPHABET[_this2.ALPHALENGTH - 1 - index];
+        }).join('');
       }
     }, {
       key: 'update',
       value: function update() {
-        var input = this.inputEl.value.trim();
-        var output = this.decipher(input);
+        var input = this.inputElement.value.trim();
+        var output = this.encode(input);
 
-        this.outputEl.value = output;
+        this.outputElement.value = output;
       }
     }]);
 
